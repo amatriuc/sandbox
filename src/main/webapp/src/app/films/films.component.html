@@ -1,0 +1,48 @@
+<section>
+  <p-dataList [immutable]="" [value]="films" [paginator]="true" [rows]="5" *ngIf="films">
+    <p-header>
+      List of Films
+      <button pButton type="button" (click)="onAddFilm()" label="AddFilm"></button>
+    </p-header>
+    <ng-template let-film pTemplate="item">
+      <div class="ui-g ui-fluid car-item">
+        <div class="ui-g-12 ui-md-3" style="text-align:center">
+          <img src="">
+        </div>
+        <div class="ui-g-12 ui-md-6 car-details">
+          <div class="ui-g">
+            <div class="ui-g-2 ui-sm-6">Title: </div>
+            <div class="ui-g-10 ui-sm-6">{{film.title}}</div>
+
+            <div class="ui-g-2 ui-sm-6">Date Prod: </div>
+            <div class="ui-g-10 ui-sm-6">{{film.dateProd}}</div>
+
+            <div class="ui-g-2 ui-sm-6">Kind: </div>
+            <div class="ui-g-10 ui-sm-6">{{film.kind}}</div>
+
+            <div class="ui-g-2 ui-sm-6">Len: </div>
+            <div class="ui-g-10 ui-sm-6">{{film.len}}</div>
+          </div>
+        </div>
+        <div class="ui-g-12 ui-md-3" style="text-align:center">
+          <button pButton type="button" (click)="onEdit(film)" label="Edit"></button>
+          <button pButton type="button" (click)="onDelete(film)" label="Delete"></button>
+        </div>
+      </div>
+    </ng-template>
+  </p-dataList>
+  <p-dialog header="Edit Film" [(visible)]="displayDialog" modal="modal">
+    <div *ngIf="film">
+      <input type="hidden" [(ngModel)]="film.id"/>
+      <input type="text" pInputText [(ngModel)]="film.title"/>
+      <input type="text" pInputText [(ngModel)]="film.dateProd"/>
+      <input type="text" pInputText [(ngModel)]="film.kind"/>
+      <input type="text" pInputText [(ngModel)]="film.len"/>
+    </div>
+    <p-footer>
+      <button type="button" pButton icon="fa-check" (click)="onSave()" label="Save"></button>
+      <button type="button" pButton icon="fa-close" (click)="onClose()" label="Cancel"></button>
+    </p-footer>
+  </p-dialog>
+
+</section>
