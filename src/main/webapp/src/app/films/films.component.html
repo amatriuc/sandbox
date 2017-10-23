@@ -1,8 +1,8 @@
 <section>
+  <button class="ui-button-success" pButton type="button" (click)="onAddFilm()" label="AddFilm"></button>
   <p-dataList [immutable]="" [value]="films" [paginator]="true" [rows]="5" *ngIf="films">
     <p-header>
       List of Films
-      <button pButton type="button" (click)="onAddFilm()" label="AddFilm"></button>
     </p-header>
     <ng-template let-film pTemplate="item">
       <div class="ui-g ui-fluid car-item">
@@ -24,24 +24,48 @@
             <div class="ui-g-10 ui-sm-6">{{film.len}}</div>
           </div>
         </div>
-        <div class="ui-g-12 ui-md-3" style="text-align:center">
-          <button pButton type="button" (click)="onEdit(film)" label="Edit"></button>
-          <button pButton type="button" (click)="onDelete(film)" label="Delete"></button>
+        <div class="ui-g-12 ui-md-1" style="text-align:center">
+          <button class="ui-button-success" pButton type="button" (click)="onEdit(film)" label="Edit"></button>
+          <button class="ui-button-danger" pButton type="button" (click)="onDelete(film)" label="Delete"></button>
         </div>
       </div>
     </ng-template>
   </p-dataList>
-  <p-dialog header="Edit Film" [(visible)]="displayDialog" modal="modal">
-    <div *ngIf="film">
+
+  <p-dialog id="film-dialog" header="Edit Film" [(visible)]="displayDialog"
+            modal="modal" [style]="{'overflow':'visible'}" [width]="700">
+    <div *ngIf="film" class="ui-grid ui-grid-responsive ui-fluid">
+
       <input type="hidden" [(ngModel)]="film.id"/>
-      <input type="text" pInputText [(ngModel)]="film.title"/>
-      <input type="text" pInputText [(ngModel)]="film.dateProd"/>
-      <input type="text" pInputText [(ngModel)]="film.kind"/>
-      <input type="text" pInputText [(ngModel)]="film.len"/>
+
+      <div class="form-group row">
+        <label for="title" class="col-4 col-form-label" >Title:</label>
+        <div class="col-8">
+          <input id="title" class="form-control" type="text" pInputText [(ngModel)]="film.title"/>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="dateProd" class="col-4 col-form-label" >Date prod:</label>
+        <div class="col-8">
+          <input id="dateProd" class="form-control" type="text" pInputText [(ngModel)]="film.dateProd"/>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="dateProd" class="col-4 col-form-label" >Kind:</label>
+        <div class="col-8">
+          <input id="kind" class="form-control" type="text" pInputText [(ngModel)]="film.kind"/>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="len" class="col-4 col-form-label" >Length:</label>
+        <div class="col-8">
+          <input id="len" type="text" class="form-control" pInputText [(ngModel)]="film.len"/>
+        </div>
+      </div>
     </div>
     <p-footer>
-      <button type="button" pButton icon="fa-check" (click)="onSave()" label="Save"></button>
-      <button type="button" pButton icon="fa-close" (click)="onClose()" label="Cancel"></button>
+      <button class="ui-button-success" type="button" pButton icon="fa-check" (click)="onSave()" label="Save"></button>
+      <button class="ui-button-danger" type="button" pButton icon="fa-close" (click)="onClose()" label="Cancel"></button>
     </p-footer>
   </p-dialog>
 

@@ -5,7 +5,7 @@ import {FilmsService} from "./films.service";
 @Component({
   selector: 'films',
   templateUrl: './films.component.html',
-  styleUrls: ['./films.component.css']
+  styleUrls: ['./films.component.scss']
 })
 export class FilmsComponent implements OnInit {
 
@@ -74,11 +74,11 @@ export class FilmsComponent implements OnInit {
   }
 
   onClose() {
-
+    this.film = null;
+    this.displayDialog = false;
   }
 
   onDelete(film) {
-    console.log(film);
     this.filmsService.deleteFilm(film.id).subscribe(data => {
       // This way for fronted refresh data
       // let index: number = this.findEventIndexById(film.id);
