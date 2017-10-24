@@ -1,6 +1,6 @@
 <section>
   <button class="ui-button-success" pButton type="button" (click)="onAddFilm()" label="AddFilm"></button>
-  <p-dataList [immutable]="" [value]="films" [paginator]="true" [rows]="5" *ngIf="films">
+  <p-dataList [value]="films" [paginator]="true" [rows]="5" *ngIf="films">
     <p-header>
       List of Films
     </p-header>
