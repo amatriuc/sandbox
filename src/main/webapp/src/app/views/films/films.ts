@@ -4,5 +4,6 @@ export class Film {
   title: any;
   dateProd: any;
   kind: any;
+  note: any;
   len: any;
 }

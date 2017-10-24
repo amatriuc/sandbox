@@ -5,6 +5,7 @@ CREATE TABLE public.films (
     date_prod   varchar(40),
     kind        varchar(40),
     len        	varchar(40),
+    note        varchar(40),
     CONSTRAINT pk_films PRIMARY KEY(id)
 );
 // films table

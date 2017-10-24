@@ -21,6 +21,8 @@ public class Films implements Serializable {
 
     private String kind;
 
+    private String note;
+
     private String len;
 
     public Long getId() {
@@ -61,5 +63,13 @@ public class Films implements Serializable {
 
     public void setLen(String len) {
         this.len = len;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
     }
 }
