@@ -1,5 +1,5 @@
 <section>
-  <button class="ui-button-success" pButton type="button" (click)="onAddFilm()" label="AddFilm"></button>
+  <button class="btn btn-success" type="button" (click)="onAddFilm()"><i class="fa fa-magic"></i>&nbsp; Add Film</button>
   <p-dataList [value]="films" [paginator]="true" [rows]="5" *ngIf="films">
     <p-header>
       List of Films
@@ -14,22 +14,22 @@
             <div class="ui-g-2 ui-sm-6">Title: </div>
             <div class="ui-g-10 ui-sm-6">{{film.title}}</div>
 
-            <div class="ui-g-2 ui-sm-6">Date Prod: </div>
-            <div class="ui-g-10 ui-sm-6">{{film.dateProd}}</div>
-
             <div class="ui-g-2 ui-sm-6">Kind: </div>
             <div class="ui-g-10 ui-sm-6">{{film.kind}}</div>
 
-            <div class="ui-g-2 ui-sm-6">Note: </div>
-            <div class="ui-g-10 ui-sm-6">{{film.note}}</div>
+            <div class="ui-g-2 ui-sm-6">Date Prod: </div>
+            <div class="ui-g-10 ui-sm-6">{{film.dateProd}}</div>
 
             <div class="ui-g-2 ui-sm-6">Len: </div>
             <div class="ui-g-10 ui-sm-6">{{film.len}}</div>
+
+            <div class="ui-g-2 ui-sm-6">Note: </div>
+            <div class="ui-g-10 ui-sm-6">{{film.note}}</div>
           </div>
         </div>
         <div class="ui-g-12 ui-md-1" style="text-align:center">
-          <button class="ui-button-success" pButton type="button" (click)="onEdit(film)" label="Edit"></button>
-          <button class="ui-button-danger" pButton type="button" (click)="onDelete(film)" label="Delete"></button>
+          <button class="btn btn-success" type="button" (click)="onEdit(film)"><i class="fa fa-magic"></i>&nbsp; Edit Film</button>
+          <button class="btn btn-danger" type="button" (click)="onDelete(film)"><i class="fa fa-rss"></i>&nbsp;&nbsp; Delete &nbsp;&nbsp;</button>
         </div>
       </div>
     </ng-template>
@@ -48,15 +48,15 @@
         </div>
       </div>
       <div class="form-group row">
-        <label for="dateProd" class="col-4 col-form-label" >Date prod:</label>
-        <div class="col-8">
-          <input id="dateProd" class="form-control" type="text" pInputText [(ngModel)]="film.dateProd"/>
-        </div>
-      </div>
-      <div class="form-group row">
         <label for="dateProd" class="col-4 col-form-label" >Kind:</label>
         <div class="col-8">
           <input id="kind" class="form-control" type="text" pInputText [(ngModel)]="film.kind"/>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="dateProd" class="col-4 col-form-label" >Date prod:</label>
+        <div class="col-8">
+          <input id="dateProd" class="form-control" type="text" pInputText [(ngModel)]="film.dateProd"/>
         </div>
       </div>
       <div class="form-group row">
@@ -66,15 +66,15 @@
         </div>
       </div>
       <div class="form-group row">
-        <label for="len" class="col-4 col-form-label" >Note:</label>
+        <label for="note" class="col-4 col-form-label" >Note:</label>
         <div class="col-8">
-          <input id="len" type="text" class="form-control" pInputText [(ngModel)]="film.note"/>
+          <input id="note" type="text" class="form-control" pInputText [(ngModel)]="film.note"/>
         </div>
       </div>
     </div>
     <p-footer>
-      <button class="ui-button-success" type="button" pButton icon="fa-check" (click)="onSave()" label="Save"></button>
-      <button class="ui-button-danger" type="button" pButton icon="fa-close" (click)="onClose()" label="Cancel"></button>
+      <button class="btn btn-success" type="button" (click)="onSave()"><i class="fa fa-magic"></i>&nbsp; Save</button>
+      <button class="btn btn-danger" type="button" (click)="onClose()"><i class="fa fa-rss"></i>&nbsp;&nbsp; Cancel &nbsp;&nbsp;</button>
     </p-footer>
   </p-dialog>
 
