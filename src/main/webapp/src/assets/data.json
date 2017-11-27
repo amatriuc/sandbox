@@ -1,10 +1,14 @@
 {
   "tag": "div",
   "attributes": {
-    "style": "color: red"
+    "style": "background-color: white; padding: 10px;"
   },
-  "content": [
-    {
+  "content": [{
+    "tag": "div",
+    "attributes": {
+      "style": "margin: 10px"
+    },
+    "content": [{
       "tag": "span",
       "attributes": {
         "style": "color: red"
@@ -15,12 +19,38 @@
         }
       ]
     },{
-      "tag": "input",
+        "tag": "input",
+        "attributes": {
+          "type": "text",
+          "value": "test",
+          "style": "color: green"
+        }
+      }]
+  },{
+      "tag": "div",
       "attributes": {
-        "type": "text",
-        "value": "test",
-        "style": "color: green"
-      }
-    }
-  ]
+        "style": "margin: 10px"
+      },
+      "content": [
+        {
+          "tag": "span",
+          "attributes": {
+            "style": "color: red"
+          },
+          "content": [
+            {
+              "text": "Enter value: "
+            }
+          ]
+        },
+        {
+          "tag": "input",
+          "attributes": {
+            "type": "text",
+            "value": "test",
+            "style": "color: green"
+          }
+        }
+      ]
+    }]
 }

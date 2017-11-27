@@ -26,66 +26,41 @@ export class FilmsComponent implements OnInit {
   loadDomNode() {
     this.filmsService.getDomNode().subscribe(domNode => {
       this.domNode = domNode;
-      console.log(this.domNode);
       this.createHtml(this.domNode);
     });
   }
 
-  generateCmp(domNode) {
-    let str = '';
-    for(let prop in domNode) {
-      if (prop == 'tag') {
-
-        str += '<' + domNode[prop]
-      }
-      if (prop == 'attributes') {
-        let obj = domNode[prop];
+  genCmp(domNode) {
+    let cmpStr = '';
+    if(domNode.tag) {
+      cmpStr += '<' + domNode.tag;
+      if(domNode.attributes) {
+        let obj = domNode.attributes;
         for (let attr in obj) {
-          str += ' ' + attr + '="' + obj[attr] + '"'
+          cmpStr += ' ' + attr + '="' + obj[attr] + '"';
         }
-        str+='>'
+        let closeTag = domNode.tag != 'input' ? '>' : '/>';
+        cmpStr+=closeTag;
+      } else {
+        let closeTag = domNode.tag != 'input' ? '>' : '/>';
+        cmpStr+=closeTag;
       }
-      if(prop ==  'text') {
-        str+= domNode[prop]
-      }
-      if(prop == 'content') {
-        let arr = domNode[prop];
-        for(let cnt of arr) {
-          str+=this.generateCmp(cnt);
-          console.log(cnt);
+      if(domNode.content) {
+        for(let dm of domNode.content) {
+          let closeTag = !dm.content ? '</' + domNode.tag + '>' : '';
+          cmpStr+= this.genCmp(dm)+closeTag;
         }
       }
-
+    } else if(domNode.text) {
+      cmpStr+= domNode.text;
     }
-    return str;
+
+    return cmpStr;
   }
 
   createHtml(domNode) {
-    let str = '';
-    for(let prop in domNode) {
-      if(prop == 'tag') {
-
-        str+= '<'+domNode[prop]
-      }
-      if(prop == 'attributes') {
-        let obj = domNode[prop];
-        for(let attr in obj) {
-          str+= ' '+ attr + '="' + obj[attr]+'"'
-        }
-        str+='>'
-      }
-      if(prop == 'content') {
-        let arr = domNode[prop];
-        for(let cnt of arr) {
-          str+=this.generateCmp(cnt);
-          console.log(cnt);
-        }
-      }
-
-    }
-    console.log(str);
-
-    this.jsonElement = str;
+    this.jsonElement = this.genCmp(domNode);
+    console.log(this.jsonElement);
   }
 
 }
