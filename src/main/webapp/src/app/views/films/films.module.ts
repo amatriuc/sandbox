@@ -7,6 +7,7 @@ import {ButtonModule, DataListModule, DialogModule, InputTextModule} from "prime
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import {RouterModule} from "@angular/router";
+import {HtmlOutlet} from "./html-outler";
 
 
 @NgModule({
@@ -23,6 +24,6 @@ import {RouterModule} from "@angular/router";
     InputTextModule
   ],
   providers: [FilmsService],
-  declarations: [FilmsComponent]
+  declarations: [FilmsComponent,HtmlOutlet]
 })
 export class FilmsModule { }

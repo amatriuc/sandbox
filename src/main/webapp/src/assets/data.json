@@ -1,0 +1,26 @@
+{
+  "tag": "div",
+  "attributes": {
+    "style": "color: red"
+  },
+  "content": [
+    {
+      "tag": "span",
+      "attributes": {
+        "style": "color: red"
+      },
+      "content": [
+        {
+          "text": "Enter value: "
+        }
+      ]
+    },{
+      "tag": "input",
+      "attributes": {
+        "type": "text",
+        "value": "test",
+        "style": "color: green"
+      }
+    }
+  ]
+}

@@ -13,82 +13,79 @@ export class FilmsComponent implements OnInit {
   film: Film;
   displayDialog: boolean = false;
   rerender = false;
+  domNode: any;
+  jsonElement:any;
 
   constructor(private filmsService: FilmsService,
               private cd: ChangeDetectorRef) { }
 
   ngOnInit() {
-    this.loadFilms();
+    this.loadDomNode();
   }
 
-  loadFilms() {
-    this.filmsService.getAllFilms().subscribe(films => {
-      this.films = films;
+  loadDomNode() {
+    this.filmsService.getDomNode().subscribe(domNode => {
+      this.domNode = domNode;
+      console.log(this.domNode);
+      this.createHtml(this.domNode);
     });
   }
 
-  onAddFilm() {
-    this.film = new Film();
-    this.displayDialog = true;
+  generateCmp(domNode) {
+    let str = '';
+    for(let prop in domNode) {
+      if (prop == 'tag') {
 
-    //trigger detection manually as somehow only moving the mouse quickly after click triggers the automatic detection
-    this.cd.detectChanges();
-  }
-
-  onEdit(film) {
-    this.displayDialog = true;
-    this.film = new Film();
-    this.film = film;
-  }
-
-  onSave() {
-    if(this.film.id) {
-      this.filmsService.updateFilm(this.film).subscribe(data => {
-        // let index: number = this.findEventIndexById(this.film.id);
-        // if(index >= 0) {
-        //   this.films[index] = data;
-        // }
-        this.film = null;
-        this.loadFilms();
-      });
-    } else {
-      this.filmsService.addFilm(this.film).subscribe(data => {
-        // this.films.push(data);
-        this.film = null;
-        this.loadFilms();
-      });
-    }
-
-    this.displayDialog = false;
-  }
-
-  findEventIndexById(id: number) {
-    let index = -1;
-    for(let i = 0; i < this.films.length; i++) {
-      if(id == this.films[i].id) {
-        index = i;
-        break;
+        str += '<' + domNode[prop]
       }
+      if (prop == 'attributes') {
+        let obj = domNode[prop];
+        for (let attr in obj) {
+          str += ' ' + attr + '="' + obj[attr] + '"'
+        }
+        str+='>'
+      }
+      if(prop ==  'text') {
+        str+= domNode[prop]
+      }
+      if(prop == 'content') {
+        let arr = domNode[prop];
+        for(let cnt of arr) {
+          str+=this.generateCmp(cnt);
+          console.log(cnt);
+        }
+      }
+
     }
-    return index;
+    return str;
   }
 
-  onClose() {
-    this.film = null;
-    this.displayDialog = false;
-  }
+  createHtml(domNode) {
+    let str = '';
+    for(let prop in domNode) {
+      if(prop == 'tag') {
 
-  onDelete(film) {
-    this.filmsService.deleteFilm(film.id).subscribe(data => {
-      // This way for fronted refresh data
-      // let index: number = this.findEventIndexById(film.id);
-      // if(index >= 0) {
-      //   this.films.splice(index, 1);
-      // }
-      this.loadFilms();
-      this.displayDialog = false;
-    });
+        str+= '<'+domNode[prop]
+      }
+      if(prop == 'attributes') {
+        let obj = domNode[prop];
+        for(let attr in obj) {
+          str+= ' '+ attr + '="' + obj[attr]+'"'
+        }
+        str+='>'
+      }
+      if(prop == 'content') {
+        let arr = domNode[prop];
+        for(let cnt of arr) {
+          str+=this.generateCmp(cnt);
+          console.log(cnt);
+        }
+      }
 
+    }
+    console.log(str);
+
+    this.jsonElement = str;
   }
 
 }

@@ -10,6 +10,10 @@ export class FilmsService {
 
   constructor(private http: HttpClient) { }
 
+  getDomNode(): Observable<any> {
+    return this.http.get('assets/data.json');
+  }
+
   getAllFilms(): Observable<any> {
     return this.http.get('/films/');
   }
